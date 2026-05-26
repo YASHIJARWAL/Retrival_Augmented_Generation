@@ -1,21 +1,25 @@
 from sentence_transformers import (
     SentenceTransformer
 )
+import os 
+from dotenv import load_dotenv
 
 from qdrant_client import QdrantClient
 
 from rank_bm25 import BM25Okapi
 
 import numpy as np
+load_dotenv()
 
-COLLECTION_NAME = "rust_book"
+
+COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 
 client = QdrantClient(
-    path="./qdrant_data"
+    path = os.getenv("QDRANT_DATA")
 )
 
 embedding_model = SentenceTransformer(
-    "BAAI/bge-large-en-v1.5"
+    os.getenv("EMBEDDING_MODEL")
 )
 
 

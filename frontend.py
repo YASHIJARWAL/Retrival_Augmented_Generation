@@ -1,7 +1,10 @@
 import streamlit as st
 import requests
-
-API_URL = "http://127.0.0.1:8000/ask"
+import os
+from dotenv import load_dotenv
+load_dotenv()
+API_URL = os.getenv("API_URL")
+print(API_URL)
 
 st.set_page_config(
     page_title="Rust RAG Assistant",

@@ -1,6 +1,7 @@
 import fitz
 import uuid
-
+import os
+from dotenv import load_dotenv
 from sentence_transformers import SentenceTransformer
 from qdrant_client import QdrantClient
 from qdrant_client.models import (
@@ -12,16 +13,16 @@ from qdrant_client.models import (
 from langchain_text_splitters import (
     RecursiveCharacterTextSplitter
 )
-
-PDF_PATH = "/home/yashijarwal/Downloads/Comprehensive Rust  - comprehensive-rust.pdf"
-COLLECTION_NAME = "rust_book"
+load_dotenv()
+PDF_PATH = os.getenv("PDF_PATH")
+COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 
 client = QdrantClient(
-    path="./qdrant_data"
+    path=os.getenv("QDRANT_DATA")
 )
 
 embedding_model = SentenceTransformer(
-    "BAAI/bge-large-en-v1.5"
+    os.getenv("EMBEDDING_MODEL")
 )
 
 splitter = RecursiveCharacterTextSplitter(

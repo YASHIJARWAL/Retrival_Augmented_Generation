@@ -2,12 +2,16 @@ import requests
 
 from retriever import HybridRetriever
 from prompts import SYSTEM_PROMPT
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 OLLAMA_URL = (
-    "http://localhost:11434/api/generate"
+    os.getenv("OLLAMA_URL")
 )
 
-MODEL_NAME = "qwen2.5:7b"
+MODEL_NAME = os.getenv("MODEL_NAME")
 
 retriever = None
 
